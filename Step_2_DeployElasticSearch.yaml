@@ -18,11 +18,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: elasticsearch         
+      component: elasticsearch
   template:
     metadata:
       labels:
-        component: elasticsearch    
+        component: elasticsearch
     spec:
       initContainers:
       - name: init-sysctl
@@ -37,14 +37,14 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: harbor.pks.cfrocket.com/workshop/harbor-elasticsearch:1.0
+        image: msegvich/k8s-es:latest
         env:
         - name: KUBERNETES_CA_CERTIFICATE_FILE
           valueFrom:
             configMapKeyRef:
               name: elastic-search-config
               key: es.cert
-              
+
         - name: "CLUSTER_NAME"
           valueFrom:
             configMapKeyRef:
@@ -83,5 +83,5 @@ spec:
       volumes:
         - name: ci-data-es
           persistentVolumeClaim:
-            claimName: es-claim-pvc
-      serviceAccountName: userserviceaccount     
+            claimName: aws-claim
+      serviceAccountName: userserviceaccount

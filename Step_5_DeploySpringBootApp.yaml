@@ -15,14 +15,14 @@ spec:
       initContainers:
       - name: init-myservice
         image: busybox
-        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 60; done;']     
+        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 60; done;']
       containers:
       - name: geosearch-app
-        image: harbor.pks.cfrocket.com/workshop/harbor-geosearch:4.0
+        image: msegvich/geosearch:latest
         ports:
         - containerPort: 8080
         resources:
           requests:
-            cpu: "100m"        
+            cpu: "100m"
         imagePullPolicy: Always
-      serviceAccountName: userserviceaccount   
+      serviceAccountName: userserviceaccount
