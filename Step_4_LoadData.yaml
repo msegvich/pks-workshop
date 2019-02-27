@@ -9,10 +9,10 @@ spec:
     spec:
       containers:
       - name: esinitializer
-        image: harbor.pks.cfrocket.com/workshop/es-init:latest
+        image: msegvich/es-init:latest
       initContainers:
       - name: init-myservice
         image: busybox
-        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 2; done;']        
+        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 2; done;']
       restartPolicy: Never
       serviceAccountName: userserviceaccount
