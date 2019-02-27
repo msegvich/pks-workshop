@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geosearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: geosearch
+  template:
+    metadata:
+      labels:
+        app: geosearch
+    spec:
+      initContainers:
+      - name: init-myservice
+        image: busybox
+        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 60; done;']
+      containers:
+      - name: geosearch-app
+        image: msegvich/geosearch:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+        imagePullPolicy: Always
+      serviceAccountName: userserviceaccount
