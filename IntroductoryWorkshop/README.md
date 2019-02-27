@@ -9,8 +9,7 @@ This is a sample SpringBoot application that performs Geo Bounded queries agains
 	- [Get Cluster Credentials](#get-cluster-credentials)
 	- [Validating your Cluster](#validating-your-cluster)
 	- [Accessing the Dashboard](#accessing-the-dashboard)
-- [3. Lab Exercise: Set Environment Variables](#3-lab-exercise-set-environment-variables)
-- [4. Lab Exercise: Deploy A SpringBoot application with an Elastic Search Backend](#4-lab-exercise-deploy-a-springboot-application-with-an-elastic-search-backend)
+- [3. Lab Exercise: Deploy A SpringBoot application with an Elastic Search Backend](#3-lab-exercise-deploy-a-springboot-application-with-an-elastic-search-backend)
 
 <!-- /TOC -->
 ### 1. Install and Setup CLIs
@@ -55,21 +54,7 @@ kubernetes-dashboard is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/ap
 monitoring-influxdb is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api/v1/namespaces/kube-system/services/monitoring-influxdb/proxy
 </pre>
 
-### 3. Lab Exercise: Set Environment Variables
-
-Prerequisite: Initialize the environment with your credentials for the registry. Please use the account and user index that was provided to you for this lab exercise.
-
-Unix/Mac
-<pre>
-export USER_INDEX="1"
-</pre>
-
-Windows PowerShell
-<pre>
-$env:USER_INDEX="1"
-</pre>
-
-### 4. Lab Exercise: Deploy A SpringBoot application with an Elastic Search Backend
+### 3. Lab Exercise: Deploy A SpringBoot application with an Elastic Search Backend
 1. A StorageClass and volume have already been provisioned for the Cluster. This is provisioned at the Kubernetes cluster level and therefore no need to namespace qualify it.
 
 2. Create a new Service Account and Image pull secret
