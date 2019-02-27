@@ -13,7 +13,7 @@ This is a sample SpringBoot application that performs Geo Bounded queries agains
 
 <!-- /TOC -->
 ### 1. Install and Setup CLIs
-### NOTE: You only need to do this if you use your local machine.  This isn't necessary if you ssh into the provided jumpbox.
+### NOTE: Proceed to [2. Cluster Access and Validation](#2-cluster-access-and-validation) if you are sshing into the provided jumpbox. You only need to do this if you use your local machine.
 
 #### Install PKS CLI
 In order to install the PKS CLI please follow these instructions: https://docs.pivotal.io/runtimes/pks/1-2/installing-pks-cli.html#windows. Note, you will need to register with network.pivotal.io in order to download the CLI.
@@ -28,6 +28,15 @@ What you download is the executable. After downloading, rename the file to `kube
 For reference, here are some other ways to install, https://kubernetes.io/docs/tasks/tools/install-kubectl
 
 ### 2. Cluster Access and Validation
+
+#### ssh Into the Jumpbox
+
+There are few ways to do this.  If you have ssh locally you can access the jumpbox through that method. Ensure your private key has no file extension and has read-only permissions (400).
+
+<pre> ssh -i path_to_cert user#@jumpbox.aws.pcfapps.org -p 2222 </pre>
+
+Otherwise you can you can use Chrome's [Secure Shell](https://chrome.google.com/webstore/detail/secure-shell-app/pnhechapfaindjhompbnflcldabbghjo?hl=en).
+
 #### Get Cluster Credentials
 You will need to retrieve the cluster credentials from PKS. First login using the the PKS credentials that were provided to you for this lab exercise.
 
