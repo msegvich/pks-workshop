@@ -82,7 +82,7 @@ kubectl create serviceaccount userserviceaccount
 
 7. Expose the SpringBoot Application. This can be done in a couple of ways. We will look at two ways of doing it in this example.
 
-<ul>Exposing with the LoadBalancer
+<ul>Exposing with a Service
 	<pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/IntroductoryWorkshop/Step_6_ExposeSpringBootAppNodePort.yaml</pre>
 </ul>
 
