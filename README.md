@@ -31,7 +31,7 @@ For reference, here are some other ways to install, https://kubernetes.io/docs/t
 You will need to retrieve the cluster credentials from PKS. First login using the the PKS credentials that were provided to you for this lab exercise.
 
 <pre>
-pks login -a api.pks.cfrocket.com -u USERNAME -p PASSWORD -k
+pks login -a api.pks.pcfdemo.pcfapps.org -u USERNAME -p PASSWORD -k
 </pre>
 
 Now you can retrive your Kubernetes cluster credentials. Please use the cluster name that was provided to you for this lab exercise.
@@ -46,11 +46,11 @@ Ensure that you can access the API Endpoints on the Master
 
 You should see something similar to the following:
 <pre>
-Kubernetes master is running at https://workshop.clusters.pks.cfrocket.com:8443
-Heapster is running at https://workshop.clusters.pks.cfrocket.com:8443/api/v1/namespaces/kube-system/services/heapster/proxy
-KubeDNS is running at https://workshop.clusters.pks.cfrocket.com:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-kubernetes-dashboard is running at https://workshop.clusters.pks.cfrocket.com:8443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
-monitoring-influxdb is running at https://workshop.clusters.pks.cfrocket.com:8443/api/v1/namespaces/kube-system/services/monitoring-influxdb/proxy
+Kubernetes master is running at https://demo1.pks.pcfdemo.pcfapps.org:8443
+Heapster is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api/v1/namespaces/kube-system/services/heapster/proxy
+KubeDNS is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+kubernetes-dashboard is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+monitoring-influxdb is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api/v1/namespaces/kube-system/services/monitoring-influxdb/proxy
 </pre>
 
 #### Accessing the Dashboard
@@ -94,13 +94,13 @@ $env:HARBOR_EMAIL="User1@acme.org"
 
 <ul>GCP:
 
-  <pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_0_ProvisionStorageClass_GCP.yaml</pre>
+  <pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_0_ProvisionStorageClass_GCP.yaml</pre>
 </ul>
 
 
 <ul>vSphere:
 
-  <pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_0_ProvisionStorageClass_vSphere.yaml</pre>
+  <pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_0_ProvisionStorageClass_vSphere.yaml</pre>
 </ul>
 
 2. Create a user defined Namespace. Note: Update the command below to use the namespace that you are going to be delpoying into.
@@ -138,28 +138,28 @@ kubectl patch serviceaccount userserviceaccount -p '{\"imagePullSecrets\": [{\"n
 </pre></ul>
 
 5. Create the Storage Volume
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_1_ProvisionStorage.yaml</pre></ul>
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_1_ProvisionStorage.yaml</pre></ul>
 
 6. Deploy Elastic Search
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_2_DeployElasticSearch.yaml</pre></ul>
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_2_DeployElasticSearch.yaml</pre></ul>
 
 7. Expose the Elastic Search Service
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_3_ExposeElasticSearch.yaml</pre></ul>
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_3_ExposeElasticSearch.yaml</pre></ul>
 
 8. Load the Data via a Job
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_4_LoadData.yaml</pre></ul>
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_4_LoadData.yaml</pre></ul>
 
 9. Deploy the SpringBoot Geosearch Application
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_5_DeploySpringBootApp.yaml</pre></ul>
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_5_DeploySpringBootApp.yaml</pre></ul>
 
 10. Expose the SpringBoot Application. This can be done in a couple of ways. We will look at two ways of doing it in this example.
 
 <ul>Exposing with the LoadBalancer
-	<pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_6_ExposeSpringBootApp.yaml</pre>
+	<pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_6_ExposeSpringBootApp.yaml</pre>
 </ul>
 
-<ul>Exposing with the Ingress 
-	<pre>kubectl create -f https://raw.githubusercontent.com/gvijayar/pks-workshop/master/Step_6_ExposeSpringBootAppIngress.yaml</pre>
+<ul>Exposing with the Ingress
+	<pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/Step_6_ExposeSpringBootAppIngress.yaml</pre>
 </ul>
 
 11. Auto-Scale the Frontend
