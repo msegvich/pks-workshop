@@ -96,13 +96,15 @@ kubectl create serviceaccount userserviceaccount
 </ul>
 
 <ul>Exposing with the Ingress - If you're on the jumpbox, you can use the local file.
-
-	<pre>kubectl apply -f Step_6_ExposeSpringBootAppIngressWithJenkins.yaml</pre>
-
-	If you are using kubectl locally from your laptop you will need to edit the yaml to update the URL for the host to match your cluster name, e.g. democluster1.
-		<pre>kubectl apply -f Step_6_ExposeSpringBootAppIngressWithJenkins.yaml</pre>
+	<pre>
+		kubectl apply -f Step_6_ExposeSpringBootAppIngressWithJenkins.yaml
+	</pre>
 </ul>
 
+<ul>
+	If you are using kubectl locally from your laptop you will need to edit the yaml to update the URL for the host to match your cluster name, e.g. democluster1.
+	<pre>kubectl apply -f Step_6_ExposeSpringBootAppIngressWithJenkins.yaml</pre>
+</ul>
 
 8. Auto-Scale the Frontend
 <ul><pre>kubectl autoscale deployment geosearch --cpu-percent=70 --min=3 --max=10</pre></ul>
