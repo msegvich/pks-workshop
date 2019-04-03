@@ -121,7 +121,7 @@ In order to access the Kubernetes cluster deployed by Cody, Naomi now needs to r
 
 To get this run the following:
 <pre>
-./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02
+./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02 --NS=default
 Password: $PKS_PW
 </pre>
 
@@ -154,7 +154,7 @@ Then, retrieve the Kubernetes config file using the get-pks-k8s-config.sh script
 You should now be able to run the “kubectl get nodes” command.
 
 <pre>
-./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02
+./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02 --NS=default
 Password: $PKS_PW
 
 kubectl get nodes
