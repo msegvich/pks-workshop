@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress-rules
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName:  ingress-nginx-ingress-controller
+    servicePort: 80
+  tls:
+  - secretName: ingress-pks
+    hosts:
+    - jenkins.democluster9.pks.pcfdemo.pcfapps.org
+    - geosearch.democluster9.pks.pcfdemo.pcfapps.org
+  rules:
+  - host: jenkins.democluster9.pks.pcfdemo.pcfapps.org
+    http:
+      paths:
+      - backend:
+          serviceName: my-ci-jenkins
+          servicePort: 8080
+  - host: geosearch.democluster9.pks.pcfdemo.pcfapps.org
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: geosearch-service
+          servicePort: http
+

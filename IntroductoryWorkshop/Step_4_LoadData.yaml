@@ -9,7 +9,8 @@ spec:
     spec:
       containers:
       - name: esinitializer
-        image: msegvich/es-init:latest
+        image: msegvich/es-init:ES6
+        # image: msegvich/es-init:latest
       initContainers:
       - name: init-myservice
         image: busybox

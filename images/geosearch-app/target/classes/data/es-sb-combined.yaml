@@ -1,0 +1,134 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: es
+  labels:
+    component: elasticsearch
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+    spec:
+      initContainers:
+      - name: init-sysctl
+        image: busybox
+        imagePullPolicy: Always
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+      containers:
+      - name: es
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        image: harbor.pks.haas-146.pez.pivotal.io/pks/elasticsearch:1.0
+        imagePullPolicy: Always
+        env:
+        - name: KUBERNETES_CA_CERTIFICATE_FILE
+          value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: "CLUSTER_NAME"
+          value: "myesdb"
+        - name: "DISCOVERY_SERVICE"
+          value: "elasticsearch"
+        - name: NODE_MASTER
+          value: "true"
+        - name: NODE_DATA
+          value: "true"
+        - name: HTTP_ENABLE
+          value: "true"
+        ports:
+        - containerPort: 9200
+          name: http
+          protocol: TCP
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: ci-data-es
+      volumes:
+        - name: ci-data-es
+          emptyDir: {}
+      imagePullSecrets:
+        - name: regsecret
+---
+ apiVersion: v1
+ kind: Service
+ metadata:
+   name: elasticsearch
+   labels:
+     component: elasticsearch
+ spec:
+   type: NodePort
+   selector:
+     component: elasticsearch
+   ports:
+   - name: http
+     port: 9200
+     protocol: TCP
+   - name: transport
+     port: 9300
+     protocol: TCP
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: esinitializer
+spec:
+  template:
+    metadata:
+      name: esinitializer
+    spec:
+      containers:
+      - name: esinitializer
+        image: harbor.pks.haas-146.pez.pivotal.io/pks/esinit:1.0
+      initContainers:
+      - name: init-myservice
+        image: busybox
+        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 2; done;']        
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: regsecret
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: geosearch-app
+spec:
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: geosearch-app
+    spec:
+      containers:
+      - name: geosearch-app
+        image: harbor.pks.haas-146.pez.pivotal.io/pks/geosearch:1.0
+        ports:
+        - containerPort: 8080
+      initContainers:
+      - name: init-myservice
+        image: busybox
+        command: ['sh', '-c', 'until nslookup elasticsearch; do echo waiting for elasticsearch; sleep 2; done;']    
+      imagePullSecrets:
+      - name: regsecret
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: geosearch-service
+spec:
+  selector:
+    app: geosearch-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: NodePort

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cats
+  template:
+    metadata:
+      labels:
+        app: cats
+    spec:
+      containers:
+      - name: cats-app
+        image: harbor.pks.pcf-apps.com/harbor-demo/python-demo:1.0
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: "100m"
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: harborsecret

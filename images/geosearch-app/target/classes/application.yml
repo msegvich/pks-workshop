@@ -1,0 +1,15 @@
+
+server:
+  port: ${vcap.application.port:8080}
+
+
+elastic_search:
+  client:
+    service:
+      serviceUrl: ${ELASTICSEARCH_SERVICE_HOST:127.0.0.1}
+      servicePort: ${ELASTICSEARCH_SERVICE_PORT:9200}
+      esindex: ${ELASTICSEARCH_INDEX:us_large_cities}
+
+---
+spring:
+  profiles: cloud

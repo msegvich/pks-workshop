@@ -1,0 +1,23 @@
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      },
+      "filter": {
+        "geo_bounding_box": {
+          "location": {
+            "top_right": {
+              "lat": "41.19622318190573",
+              "lon": "-73.00140380859376"
+            },
+            "bottom_left": {
+              "lat": "40.25961676337706",
+              "lon": "-75.1986694335937"
+            }
+          }
+        }
+      }
+    }
+  }
+}

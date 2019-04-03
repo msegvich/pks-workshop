@@ -1,0 +1,11 @@
+apiVersion: apps.pivotal.io/v1beta1
+kind: Sink
+metadata:
+ name: cat-sink
+ #Replace with the correct user USER_INDEX
+ namespace: cats-1
+spec:
+ type: syslog
+ host: 35.243.205.110
+ port: 5000
+ enable_tls: false

@@ -1,0 +1,21 @@
+cluster:
+  name: "myesdb"
+master:
+  exposeHttp: true
+  replicas: 1
+  heapSize: "512m"
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    name: data
+    size: "4Gi"
+    storageClass: "aws-storage"
+data:
+  exposeHttp: true
+  replicas: 1
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    name: data
+    size: "10Gi"
+    storageClass: "aws-storage"

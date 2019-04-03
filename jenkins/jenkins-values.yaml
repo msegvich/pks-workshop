@@ -1,0 +1,49 @@
+Master:
+  # Enable pod security context (must be `true` if RunAsUser or FsGroup are set)
+  UsePodSecurityContext: true
+  # Set RunAsUser to 1000 to let Jenkins run as non-root user 'jenkins' which exists in 'jenkins/jenkins' docker image.
+  # When setting RunAsUser to a different value than 0 also set FsGroup to the same value:
+  RunAsUser: 1000
+  FsGroup: 1000
+  # For minikube, set this to NodePort, elsewhere use LoadBalancer
+  # Use ClusterIP if your setup includes ingress controller
+  ServiceType: ClusterIP
+  ImagePullPolicy: "IfNotPresent"
+  # List of plugins to be install during Jenkins master start
+  InstallPlugins:
+    - kubernetes:1.14.6
+    - kubernetes-cli:1.5.0
+    - cloudfoundry:2.3.2
+    - workflow-job:2.31
+    - workflow-aggregator:2.6
+    - credentials-binding:1.18
+    - git:3.9.3
+
+  # Enable to always override the installed plugins with the values of 'Master.InstallPlugins' on upgrade or redeployment.
+  OverwritePlugins: true
+
+Persistence:
+  Enabled: true
+  ## A manually managed Persistent Volume and Claim
+  ## Requires Persistence.Enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  ExistingClaim: jenkins-claim-pvc
+  ## jenkins data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # StorageClass: "-"
+
+## Install Default RBAC roles and bindings
+rbac:
+  install: true
+  serviceAccountName: default
+  # Role reference
+  roleRef: cluster-admin
+  # Role kind (Role or ClusterRole)
+  roleKind: ClusterRole
+  # Role binding kind (RoleBinding or ClusterRoleBinding)
+  roleBindingKind: ClusterRoleBinding

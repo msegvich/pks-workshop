@@ -1,0 +1,13 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+    name: read-nodes
+    namespace: default
+subjects:
+-   kind: User
+    name: appdev02
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: node-reader
+    apiGroup: rbac.authorization.k8s.io
