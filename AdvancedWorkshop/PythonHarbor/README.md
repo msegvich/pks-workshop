@@ -77,7 +77,7 @@ $env:HARBOR_EMAIL="dev@acme.org"
 </pre>
 
 ### 4. Lab Exercise: Deploy A Python application with Harbor Registry
-1. **(Skip this step)** Create a user defined Namespace. Note: Update the command below to use the namespace that you are going to be delpoying into.
+1. Create a user defined Namespace. Note: While the namespace isn't necessary for this excercise, it will be necessary for the Logging exercise.
 <ul>Unix/Mac
 <pre>kubectl create namespace cats-$(echo $USER_INDEX)
 kubectl config set-context $(kubectl config current-context) --namespace=cats-$(echo $USER_INDEX)
