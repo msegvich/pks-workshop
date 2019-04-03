@@ -56,6 +56,15 @@ monitoring-influxdb is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api
 
 Prerequisite: Initialize the environment with your credentials for the registry. Please use the account and user index that was provided to you for this lab exercise.
 
+On you command line terminal go to pks-workshop/AdvancedWorkshop/Setup and edit the setup_env_vars.sh with the correct setting for USER_INDEX and PKS_PW.  Ask you instructor for these if they aren't already set (if using a jumpbox).
+
+If using Linux run the following. **Note if you've already run this, you don't need to run it again as it set the variables for all the exercises.**
+<pre>
+. ./setup_env_vars.sh
+</pre>
+
+If you need to manually set this up or have Windows:
+
 Unix/Mac
 <pre>
 export USER_INDEX="1"
@@ -115,7 +124,7 @@ kubectl port-forward svc/cats-service 7090:80
 kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_lb.yml
 </pre></ul>
 
-5. Auto-Scale the Frontend
+5. If you want Auto-Scale the Frontend
 <ul><pre>kubectl autoscale deployment cats --cpu-percent=50 --min=3 --max=6</pre></ul>
 
 6. Leave this deployment running as we will use it in the next exercise.

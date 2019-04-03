@@ -56,12 +56,29 @@ monitoring-influxdb is running at https://demo1.pks.pcfdemo.pcfapps.org:8443/api
 
 Prerequisite: Initialize the environment with your credentials for the registry. Please use the account and user index that was provided to you for this lab exercise.
 
+On you command line terminal go to pks-workshop/AdvancedWorkshop/Setup and edit the setup_env_vars.sh with the correct setting for USER_INDEX and PKS_PW.  Ask you instructor for these if they aren't already set (if using a jumpbox).
+
+If using Linux run the following. **Note if you've already run this, you don't need to run it again as it set the variables for all the exercises.**
+<pre>
+. ./setup_env_vars.sh
+</pre>
+
+If you need to manually set this up or have Windows:
+
 Unix/Mac
 <pre>
 export USER_INDEX="1"
 export PKS_API=api.pks.pcf-apps.com
 export PKS_CLUSTER_NAME=user$USER_INDEX
 export PKS_CLUSTER=$PKS_CLUSTER_NAME.pks.pcf-apps.com
+</pre>
+
+Windows PowerShell
+<pre>
+$env:USER_INDEX="1"
+$env:PKS_API=api.pks.pcf-apps.com
+$env:PKS_CLUSTER_NAME=user$(echo $env:USER_INDEX)
+$env:PKS_CLUSTER=$(echo $env:PKS_CLUSTER_NAME).pks.pcf-apps.com
 </pre>
 
 ### 3. Lab Exercise: LDAP Demo
@@ -71,7 +88,8 @@ Log in to PKS
 pks login -a api.pks.pcf-apps.com -u appdev -p $PKS_PW -k
 </pre>
 
-#### PKS UAA Setup [Alana] (Already Done)
+#### PKS UAA Setup [Alana]
+**Skip this step, but read for background**
 Once PKS is deployed, it is necessary to map the PKS roles to proper LDAP groups. There are two groups defined in the LDAP server currently used.  This mapping has already been done.
 
 Map pks.clusters.admin role to LDAP group
