@@ -117,3 +117,5 @@ kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master
 
 5. Auto-Scale the Frontend
 <ul><pre>kubectl autoscale deployment cats --cpu-percent=50 --min=3 --max=6</pre></ul>
+
+6. Leave this deployment running as we will use it in the next exercise.
