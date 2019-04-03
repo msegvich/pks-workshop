@@ -102,16 +102,16 @@ kubectl config set-context $(kubectl config current-context) --namespace=cats-$(
 <ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_0_python-deployment.yml</pre></ul>
 
 4. Expose the Service
-NodePort
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_np.yml</pre></ul>
+<ul>NodePort
+<pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_np.yml</pre></ul>
 
-To get to the app you can use port-forward:
-<ul><pre>
+<ul>To get to the app you can use port-forward:
+<pre>
 kubectl port-forward svc/cats-service 7090:80
 </pre></ul>
 
-Or you can use a LoadBalancer
-<ul><pre>
+<ul>Or you can use a LoadBalancer
+<pre>
 kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_lb.yml
 </pre></ul>
 
