@@ -65,6 +65,12 @@ export PKS_CLUSTER=$PKS_CLUSTER_NAME.pks.pcf-apps.com
 </pre>
 
 ### 3. Lab Exercise: LDAP Demo
+Log in to PKS
+
+<pre>
+pks login -a api.pks.pcf-apps.com -u appdev -p $PKS_PW -k
+</pre>
+
 #### PKS UAA Setup [Alana] (Already Done)
 Once PKS is deployed, it is necessary to map the PKS roles to proper LDAP groups. There are two groups defined in the LDAP server currently used.  This mapping has already been done.
 
