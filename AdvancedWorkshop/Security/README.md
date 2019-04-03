@@ -97,6 +97,8 @@ kubectl apply -f Step_1_pod-role-spec.yml
 </pre>
 
 #### Role assignment to Naomi [Cody]
+**Ask your instructor for the PKS_PW env variable.**
+
 Once the role is defined, the development team manager (Cody) can assign this role to individuals in his team. Please note that these individuals are not part of the “developers” LDAP group and therefore cannot sign into PKS. You can demonstrate this by typing the command:
 <pre>
 pks login -a $PKS_API -u appdev02 -p $PKS_PW -k
