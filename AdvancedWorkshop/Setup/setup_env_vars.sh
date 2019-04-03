@@ -9,3 +9,5 @@ export HARBOR_REGISTRY_URL="harbor.pks.pcf-apps.com"
 export HARBOR_USERNAME="developer"
 export HARBOR_PASSWORD="Pivotal1"
 export HARBOR_EMAIL="dev@acme.org"
+# Set in advance
+export PKS_PW=

@@ -99,7 +99,7 @@ kubectl apply -f Step_1_pod-role-spec.yml
 #### Role assignment to Naomi [Cody]
 Once the role is defined, the development team manager (Cody) can assign this role to individuals in his team. Please note that these individuals are not part of the “developers” LDAP group and therefore cannot sign into PKS. You can demonstrate this by typing the command:
 <pre>
-pks login -a $PKS_API -u appdev02 -p Pivotal123! -k
+pks login -a $PKS_API -u appdev02 -p $PKS_PW -k
 </pre>
 
 To give access rights to Naomi (appdev02), Cody needs to apply another RBAC configuration file (assign-pod-role.yml) to the Kubernetes cluster.
@@ -114,7 +114,7 @@ In order to access the Kubernetes cluster deployed by Cody, Naomi now needs to r
 To get this run the following:
 <pre>
 ./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02
-Password: Pivotal123!
+Password: $PKS_PW
 </pre>
 
 This command will create a config file in the ~/.kube folder. This config file will contain the token and refresh token necessary for the user to access the Kubernetes cluster.
@@ -136,7 +136,7 @@ In our current setup, Naomi (appdev02) is only allowed to “watch pods”, as h
 To do so, you will first need to log into PKS as Cody (appdev) and apply two new yml definitions, this time at the Cluster level.
 
 <pre>
-pks login -a api.pks.pcf-apps.com -u appdev -p Pivotal123! -k
+pks login -a api.pks.pcf-apps.com -u appdev -p $PKS_PW -k
 pks get-credentials $PKS_CLUSTER_NAME
 kubectl apply -f Step_3_cluster-role-spec.yml
 kubectl apply -f Step_4_assign-cluster-role.yml
@@ -147,7 +147,7 @@ You should now be able to run the “kubectl get nodes” command.
 
 <pre>
 ./get-pks-k8s-config.sh --API=$PKS_API --CLUSTER=$PKS_CLUSTER --USER=appdev02
-Password: Pivotal123!
+Password: $PKS_PW
 
 kubectl get nodes
 </pre>
@@ -155,6 +155,6 @@ kubectl get nodes
 You have completed this workshop.  The other Labs will require you to act as Cody so login as him.
 
 <pre>
-pks login -a api.pks.pcf-apps.com -u appdev -p Pivotal123! -k
+pks login -a api.pks.pcf-apps.com -u appdev -p $PKS_PW -k
 pks get-credentials $PKS_CLUSTER_NAME
 </pre>
