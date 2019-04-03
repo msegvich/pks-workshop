@@ -30,13 +30,13 @@ For reference, here are some other ways to install, https://kubernetes.io/docs/t
 You will need to retrieve the cluster credentials from PKS. First login using the the PKS credentials that were provided to you for this lab exercise.
 
 <pre>
-pks login -a api.pks.pcf-apps.com -u USERNAME -p PASSWORD -k
+pks login -a api.pks.pcf-apps.com -u appdev -p $PKS_PW -k
 </pre>
 
 Now you can retrive your Kubernetes cluster credentials. Please use the cluster name that was provided to you for this lab exercise.
 
 <pre>
-pks get-credentials CLUSTER-NAME
+pks get-credentials $PKS_CLUSTER_NAME
 </pre>
 
 #### Validating your Cluster
@@ -102,7 +102,18 @@ kubectl config set-context $(kubectl config current-context) --namespace=cats-$(
 <ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_0_python-deployment.yml</pre></ul>
 
 4. Expose the Service
-<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service.yml</pre></ul>
+NodePort
+<ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_np.yml</pre></ul>
+
+To get to the app you can use port-forward:
+<pre>
+kubectl port-forward svc/cats-service 7090:80
+</pre>
+
+Or you can use a LoadBalancer
+<pre>
+kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_lb.yml
+</pre>
 
 5. Auto-Scale the Frontend
 <ul><pre>kubectl autoscale deployment cats --cpu-percent=50 --min=3 --max=6</pre></ul>
