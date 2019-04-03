@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cats-service
+spec:
+  selector:
+    app: cats
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 5000
+  type: NodePort

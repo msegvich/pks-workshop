@@ -106,14 +106,14 @@ NodePort
 <ul><pre>kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_np.yml</pre></ul>
 
 To get to the app you can use port-forward:
-<pre>
+<ul><pre>
 kubectl port-forward svc/cats-service 7090:80
-</pre>
+</pre></ul>
 
 Or you can use a LoadBalancer
-<pre>
+<ul><pre>
 kubectl create -f https://raw.githubusercontent.com/msegvich/pks-workshop/master/AdvancedWorkshop/PythonHarbor/Step_1_python-service_lb.yml
-</pre>
+</pre></ul>
 
 5. Auto-Scale the Frontend
 <ul><pre>kubectl autoscale deployment cats --cpu-percent=50 --min=3 --max=6</pre></ul>
